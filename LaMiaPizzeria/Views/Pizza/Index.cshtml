@@ -28,12 +28,12 @@
                     <a href="@Url.Action("Pizza", new {id = pizza.Id})">
                         <tr>
                             <!-- <th scope="row">@pizza.Id</th>-->
-                        <td>
-                            <a class="btn" href="@Url.Action("Dettagli", "Pizza", new { id = pizza.Id })">
-                                <img class="img-fluid" src="@pizza.Immagine" alt="Immagine @pizza.Nome" width="250">
-                            </a>
-                        </td>
-                        <td><strong>@pizza.Nome</strong></td>
+                            <td>
+                                <a class="btn" href="@Url.Action("Dettagli", "Pizza", new { id = pizza.Id })">
+                                    <img class="img-fluid" src="@pizza.Immagine" alt="Immagine @pizza.Nome" width="250">
+                                </a>
+                            </td>
+                            <td><strong>@pizza.Nome</strong></td>
                             <td>@pizza.Descrizione</td>
                             <td><strong>@pizza.Prezzo €</strong></td>
                         </tr>
