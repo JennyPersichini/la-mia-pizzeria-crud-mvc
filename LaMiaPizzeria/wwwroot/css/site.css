@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 html {
     font-size: 14px;
 }
@@ -15,14 +21,6 @@ html {
 
 body {
     background-image: linear-gradient(to top right, #fff8d8 0%, #fab215 50%, #fff8d8 100%);
-}
-
-.card {
-    height: 400px;
-}
-
-img {
-    height: 55%;
 }
 
 .footer-opacity {
