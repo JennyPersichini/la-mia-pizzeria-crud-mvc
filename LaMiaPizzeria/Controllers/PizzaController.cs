@@ -29,7 +29,7 @@ namespace LaMiaPizzeria.Controllers
                 }
                 else
                 {
-                    return NotFound($"L'articolo con id {id} non è stato trovato!");
+                    return NotFound("Pizza non trovata!");
                 }
             }
 
