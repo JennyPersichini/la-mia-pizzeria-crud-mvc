@@ -16,5 +16,23 @@ namespace LaMiaPizzeria.Controllers
             }
 
         }
+
+        public IActionResult Dettagli(int id)
+        {
+            using (PizzeriaContext db = new PizzeriaContext())
+            {
+                Pizza? pizzaDettagli = db.Pizze.Where(article => article.Id == id).FirstOrDefault();
+
+                if (pizzaDettagli != null)
+                {
+                    return View("Dettagli", pizzaDettagli);
+                }
+                else
+                {
+                    return NotFound($"L'articolo con id {id} non è stato trovato!");
+                }
+            }
+
+        }
     }
 }
