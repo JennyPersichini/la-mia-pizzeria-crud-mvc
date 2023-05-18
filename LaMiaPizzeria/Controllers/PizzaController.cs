@@ -33,6 +33,32 @@ namespace LaMiaPizzeria.Controllers
                 }
             }
 
+
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Pizza newPizza)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Create", newPizza);
+            }
+
+            using (PizzeriaContext db = new PizzeriaContext())
+            {
+                db.Pizze.Add(newPizza);
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
         }
     }
 }
