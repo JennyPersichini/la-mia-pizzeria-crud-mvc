@@ -6,13 +6,7 @@
 
     <form asp-controller="Pizza" asp-action="Create" method="post">
 
-        @Html.AntiForgeryToken()
-
-        <div class="mb-3">
-            <label asp-for="Immagine" class="form-label">URL Immagine</label>
-            <input asp-for="Immagine" type="text" class="form-control" required>
-            <span asp-validation-for="Immagine" class="text-danger"></span>
-        </div>
+        @Html.AntiForgeryToken()       
 
         <div class="mb-3">
             <label asp-for="Nome" class="form-label">Nome</label>
@@ -24,6 +18,12 @@
             <label asp-for="Descrizione" class="form-label">Descrizione</label>
             <textarea asp-for="Descrizione" rows="10" class="form-control"></textarea>
             <span asp-validation-for="Descrizione" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Immagine" class="form-label">URL Immagine</label>
+            <input asp-for="Immagine" type="text" class="form-control" required>
+            <span asp-validation-for="Immagine" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
