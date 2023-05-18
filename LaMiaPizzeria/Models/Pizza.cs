@@ -24,12 +24,11 @@ namespace LaMiaPizzeria.Models
         [Required(ErrorMessage = "Campo obbligatorio!")]
         public double Prezzo { get; set; }
 
+
+        //COSTRUTTORE
         public Pizza(string immagine, string nome, string descrizione, double prezzo )
         {
-            Immagine = immagine;
-            Nome = nome;
-            Descrizione = descrizione;
-            Prezzo = prezzo;
+           
         }
     }
 }
