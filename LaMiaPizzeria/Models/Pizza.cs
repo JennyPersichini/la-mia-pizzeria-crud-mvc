@@ -26,9 +26,17 @@ namespace LaMiaPizzeria.Models
 
 
         //COSTRUTTORE
-        public Pizza(string immagine, string nome, string descrizione, double prezzo )
+        public Pizza()
         {
            
+        }
+
+        public Pizza(string immagine, string nome, string descrizione, double prezzo)
+        {
+            Immagine = immagine;
+            Nome = nome;
+            Descrizione = descrizione;
+            Prezzo = prezzo;
         }
     }
 }
