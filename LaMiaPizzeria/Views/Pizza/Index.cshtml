@@ -19,13 +19,20 @@
             <table class="table bg-warning-subtle shadow-lg rounded">
 
                 <thead>
-
+                    <!--
                     <tr>
                         <th scope="col" class="col-lg-3">Foto</th>
                         <th scope="col" class="col-lg-2">Nome</th>
                         <th scope="col" class="col-lg-6">Descrizione</th>
                         <th scope="col" class="col-lg-1">Prezzo</th>
+                        </tr>-->
+                    <tr>
+                        <th scope="col" class="col-lg-3">Foto</th>
+                        <th scope="col" class="col-lg-2">Nome</th>
+                        <th scope="col" class="col-lg-1">Prezzo</th>
+                        <th scope="col" class="col-lg-6">Opzioni</th>                       
                     </tr>
+
 
                 </thead>
 
@@ -33,7 +40,7 @@
 
                     @foreach(Pizza pizza in Model)
                     {                   
-                            <tr>
+                           <!-- <tr>
                                 <td>
                                     <a class="btn" href="@Url.Action("Dettagli", "Pizza", new { id = pizza.Id })">
                                         <img class="img-fluid" src="@pizza.Immagine" alt="Immagine @pizza.Nome" width="250">
@@ -42,7 +49,18 @@
                                 <td class="fs-3"><strong>@pizza.Nome</strong></td>
                                 <td>@pizza.Descrizione</td>
                                 <td><strong>@pizza.Prezzo €</strong></td>
-                            </tr>                   
+                            </tr> -->
+
+                        <tr>
+                            <td><img class="img-fluid" src="@pizza.Immagine" alt="Immagine @pizza.Nome" width="250"></td>
+                            <td class="fs-3"><strong>@pizza.Nome</strong></td>
+                            <td><strong>@pizza.Prezzo €</strong></td>
+                            <td>
+                                <a class="btn btn-dark" href="@Url.Action("Dettagli", "Pizza", new { id = pizza.Id })">Dettagli pizza</a>
+                                <a class="btn btn-dark" href="@Url.Action("Update", "Pizza", new { id = pizza.Id })">Modifica</a>
+                                <a class="btn btn-dark" href="@Url.Action("Dettagli", "Pizza", new { id = pizza.Id })">Togli dal menù</a>
+                            </td>                            
+                        </tr>
                     }
 
                 </tbody>
