@@ -10,7 +10,7 @@ namespace LaMiaPizzeria.Controllers
         {
             using (PizzeriaContext db = new PizzeriaContext())
             {
-                List<Pizza> ListaPizze = db.Pizze.ToList<Pizza>();
+                List<Pizza> ListaPizze = db.Pizze.ToList();
 
                 return View("Index", ListaPizze);
             }
@@ -82,5 +82,64 @@ namespace LaMiaPizzeria.Controllers
             }
 
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Update(int id, Pizza modificaPizza)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Update", modificaPizza);
+            }
+
+            using (PizzeriaContext db = new PizzeriaContext())
+            {
+                Pizza? pizzaDaModificare = db.Pizze.Where(pizza => pizza.Id == id).FirstOrDefault();
+
+                if (pizzaDaModificare != null)
+                {
+                    pizzaDaModificare.Immagine = modificaPizza.Immagine;
+                    pizzaDaModificare.Nome = modificaPizza.Nome;
+                    pizzaDaModificare.Prezzo = modificaPizza.Prezzo;
+                    pizzaDaModificare.Descrizione = modificaPizza.Descrizione;                   
+
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return NotFound("Pizza non esistente!");
+                }
+
+            }
+
+        }
+
+        // ACTIONS PER ELIMINARE UNA PIZZA
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            using (PizzeriaContext db = new PizzeriaContext())
+            {
+                Pizza? pizzaDaEliminare= db.Pizze.Where(pizza => pizza.Id == id).FirstOrDefault();
+
+                if (pizzaDaEliminare != null)
+                {
+                    db.Remove(pizzaDaEliminare);
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return NotFound("Non c'è nulla da eliminare!");
+                }
+
+            }
+
+        }
+
     }
+
 }
