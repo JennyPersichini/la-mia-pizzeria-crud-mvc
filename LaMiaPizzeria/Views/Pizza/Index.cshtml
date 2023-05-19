@@ -1,55 +1,70 @@
 ﻿@model List<Pizza>
 
-<body>
+<div class="container text-center">
 
-    <div class="container text-center my-4">
-        <h1 class="fs-3">LE NOSTRE PIZZE</h1>
-    </div>
+    <div class="row my-4">
 
-    <div class="container bg-warning-subtle shadow-lg rounded">
+        <div class="col-12">
 
-        <table class="table">
+            <h1 class="fs-3" style="font-family: 'Dancing Script', cursive;">LE NOSTRE PIZZE</h1>
 
-            <thead>
-
-                <tr>
-                    <th scope="col">Foto</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Descrizione</th>
-                    <th scope="col">Prezzo</th>
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-                @foreach(Pizza pizza in Model)
-                {                   
-                        <tr>
-                            <!-- <th scope="row">@pizza.Id</th>-->
-                            <td>
-                                <a class="btn" href="@Url.Action("Dettagli", "Pizza", new { id = pizza.Id })">
-                                    <img class="img-fluid" src="@pizza.Immagine" alt="Immagine @pizza.Nome" width="250">
-                                </a>
-                            </td>
-                            <td><strong>@pizza.Nome</strong></td>
-                            <td>@pizza.Descrizione</td>
-                            <td><strong>@pizza.Prezzo €</strong></td>
-                        </tr>                   
-                }
-
-            </tbody>
-
-        </table>
+        </div>
 
     </div>
 
-    <div class="container text-center my-4">        
-        <a class="btn btn-dark" href="@Url.Action("Create", "Pizza")">
-            Aggiungi Pizza
-        </a>       
+    <div class="row my-4">
+
+        <div class="col-12">
+
+            <table class="table bg-warning-subtle shadow-lg rounded">
+
+                <thead>
+
+                    <tr>
+                        <th scope="col">Foto</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Descrizione</th>
+                        <th scope="col">Prezzo</th>
+                    </tr>
+
+                </thead>
+
+                <tbody style="font-family: 'Dancing Script', cursive;">
+
+                    @foreach(Pizza pizza in Model)
+                    {                   
+                            <tr>
+                                <td>
+                                    <a class="btn" href="@Url.Action("Dettagli", "Pizza", new { id = pizza.Id })">
+                                        <img class="img-fluid" src="@pizza.Immagine" alt="Immagine @pizza.Nome" width="250">
+                                    </a>
+                                </td>
+                                <td><strong>@pizza.Nome</strong></td>
+                                <td>@pizza.Descrizione</td>
+                                <td><strong>@pizza.Prezzo €</strong></td>
+                            </tr>                   
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-12">      
+            
+            <a class="btn btn-dark" href="@Url.Action("Create", "Pizza")">
+                Aggiungi Pizza
+            </a>  
+
+        </div>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 
-</body>
+</div>

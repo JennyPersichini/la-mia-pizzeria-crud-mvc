@@ -10,7 +10,7 @@ namespace LaMiaPizzeria.Controllers
         {
             using (PizzeriaContext db = new PizzeriaContext())
             {
-                List<Pizza> ListaPizze = db.Pizze.ToList();
+                List<Pizza> ListaPizze = db.Pizze.ToList<Pizza>();
 
                 return View("Index", ListaPizze);
             }
