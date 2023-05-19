@@ -1,0 +1,46 @@
+﻿@model Pizza
+
+<div class="container">
+
+    <h2 class="mb-3">Modifica Pizza</h2>
+
+    <form asp-controller="Pizza" asp-action="Update" asp-route-id="@Model.Id" method="post">
+
+        @Html.AntiForgeryToken()
+
+        <div class="mb-3">
+            <label asp-for="Id" class="form-label">Id - numero identificativo pizza</label>
+            <input asp-for="Id" type="text" class="form-control bg-warning-subtle shadow-lg rounded" readonly>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Nome" class="form-label">Nome</label>
+            <input asp-for="Nome" type="text" class="form-control bg-warning-subtle shadow-lg rounded" required>
+            <span asp-validation-for="Nome" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Descrizione" class="form-label">Descrizione</label>
+            <textarea asp-for="Descrizione" rows="10" class="form-control bg-warning-subtle shadow-lg rounded"></textarea>
+            <span asp-validation-for="Descrizione" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Immagine" class="form-label">URL Immagine</label>
+            <input asp-for="Immagine" type="text" class="form-control bg-warning-subtle shadow-lg rounded" required>
+            <span asp-validation-for="Immagine" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Prezzo" class="form-label">Prezzo</label>
+            <input asp-for="Prezzo" type="text" class="form-control bg-warning-subtle shadow-lg rounded" required>
+            <span asp-validation-for="Prezzo" class="text-danger"></span>
+        </div>
+
+        <div class="container text-center my-4">
+            <button type="submit" class="btn btn-dark">Aggiorna</button>
+        </div>
+
+    </form>
+
+</div>
