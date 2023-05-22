@@ -1,6 +1,8 @@
 ﻿using LaMiaPizzeria.Database;
 using LaMiaPizzeria.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace LaMiaPizzeria.Controllers
 {
@@ -37,6 +39,7 @@ namespace LaMiaPizzeria.Controllers
         }
 
         // ACTIONS PER LA CREAZIONE DI UNA NUOVA PIZZA
+        [Authorize(Roles = "ADMIN")]
         [HttpGet]
         public IActionResult Create()
         {
@@ -63,6 +66,7 @@ namespace LaMiaPizzeria.Controllers
         }
 
         // ACTIONS PER LA MODIFICA DI UNA PIZZA
+        [Authorize(Roles = "ADMIN")]
         [HttpGet]
         public IActionResult Update(int id)
         {
@@ -85,6 +89,7 @@ namespace LaMiaPizzeria.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ADMIN")]
         public IActionResult Update(int id, Pizza modificaPizza)
         {
             if (!ModelState.IsValid)
@@ -118,6 +123,7 @@ namespace LaMiaPizzeria.Controllers
         // ACTIONS PER ELIMINARE UNA PIZZA
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ADMIN")]
         public IActionResult Delete(int id)
         {
             using (PizzeriaContext db = new PizzeriaContext())
