@@ -2,6 +2,7 @@
 using LaMiaPizzeria.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.SqlServer.Server;
 using System.Data;
 
 namespace LaMiaPizzeria.Controllers
@@ -42,35 +43,29 @@ namespace LaMiaPizzeria.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            using PizzeriaContext db = new();
+            List<PizzaCategory> Categorie = db.Categorie.ToList();
 
-            using (PizzeriaContext db = new PizzeriaContext())
+            CategoriaPizzaView modelloView = new()
             {
-                List<PizzaCategory> pizzaCategory = db.PizzaCategorie.ToList();
+                Pizza = new Pizza(),
+                Categorie = Categorie,
+            };
 
-                PizzatListCategory modelForView = new PizzatListCategory();
-                modelForView.Pizza = new Pizza();
-                modelForView.PizzaCategorie = pizzaCategory;
-
-
-                return View("Create", modelForView);
-            }
-
+            return View("Create", modelloView);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(PizzatListCategory data)
+        public IActionResult Create(CategoriaPizzaView data)
         {
             if (!ModelState.IsValid)
             {
-                using (PizzeriaContext db = new PizzeriaContext())
-                {
-                    List<PizzaCategory> pizzaCategorie = db.PizzaCategorie.ToList();
-                    data.PizzaCategorie = pizzaCategorie;
+                using PizzeriaContext db = new();
+                List<PizzaCategory> categorie = db.Categorie.ToList();
+                data.Categorie = categorie;
 
-                    return View("Create", data);
-                }
-
+                return View("Create", data);
             }
 
             using (PizzeriaContext db = new PizzeriaContext())
@@ -93,11 +88,18 @@ namespace LaMiaPizzeria.Controllers
 
                 if (pizzaModificata != null)
                 {
-                    return View("Update", pizzaModificata);
+                    List<PizzaCategory> Categorie = db.Categorie.ToList();
+                    CategoriaPizzaView modelloView = new()
+                    {
+                        Pizza = new Pizza(),
+                        Categorie = Categorie,
+                    };
+
+                    return View("Update", modelloView);
                 }
                 else
                 {
-                    return NotFound("Articolo inesistente!");
+                    return NotFound("Pizza inesistente!");
                 }
 
             }
@@ -107,32 +109,39 @@ namespace LaMiaPizzeria.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "ADMIN")]
-        public IActionResult Update(int id, Pizza modificaPizza)
+        public IActionResult Update(int id, PizzaCategory data)
         {
             if (!ModelState.IsValid)
             {
-                return View("Update", modificaPizza);
+                using (PizzeriaContext db = new PizzeriaContext())
+                {
+                    List<PizzaCategory> PizzaCategory = db.PizzaCategorie.ToList();
+                    data.PizzaCategorie = PizzaCategory;
+
+                    return View("Update", data);
+                }
             }
-
-            using (PizzeriaContext db = new PizzeriaContext())
+            else
             {
-                Pizza? pizzaDaModificare = db.Pizze.Where(pizza => pizza.Id == id).FirstOrDefault();
-
-                if (pizzaDaModificare != null)
+                using (PizzeriaContext db = new PizzeriaContext())
                 {
-                    pizzaDaModificare.Immagine = modificaPizza.Immagine;
-                    pizzaDaModificare.Nome = modificaPizza.Nome;
-                    pizzaDaModificare.Prezzo = modificaPizza.Prezzo;
-                    pizzaDaModificare.Descrizione = modificaPizza.Descrizione;                   
+                    Pizza? pizzaDaModificare = db.Pizze.Where(pizza => pizza.Id == id).FirstOrDefault();
 
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    return NotFound("Pizza non esistente!");
-                }
+                    if (pizzaDaModificare != null)
+                    {
+                        pizzaDaModificare.Immagine = PizzaCategory.Immagine;
+                        pizzaDaModificare.Nome = PizzaCategory.Nome;
+                        pizzaDaModificare.Prezzo = PizzaCategory.Prezzo;
+                        pizzaDaModificare.Descrizione = PizzaCategory.Descrizione;
 
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return NotFound("Pizza non esistente!");
+                    }
+                }
             }
 
         }

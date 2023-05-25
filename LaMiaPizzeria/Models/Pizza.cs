@@ -23,6 +23,8 @@ namespace LaMiaPizzeria.Models
 
         [Required(ErrorMessage = "Campo obbligatorio!")]
         public double Prezzo { get; set; }
+        public int? PizzaCategoryId { get; set; }
+        public PizzaCategory? Categoria { get; set; }
 
 
         //COSTRUTTORE
