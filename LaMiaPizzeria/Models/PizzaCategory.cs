@@ -1,9 +1,11 @@
-﻿namespace LaMiaPizzeria.Models
+﻿using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+
+namespace LaMiaPizzeria.Models
 {
     public class PizzaCategory
     {
         public int Id { get; set; }
-        public string Title { get; set; }
+        public string Nome { get; set; }
         public string? Description { get; set; }
 
         public List<Pizza> Pizze { get; set; }
@@ -13,9 +15,9 @@
 
         }
 
-        public PizzaCategory(string title, string? description)
+        public PizzaCategory(string nome, string? description)
         {
-            Title = title;
+            Nome = nome;
             Description = description;
             Pizze = new List<Pizza>();
         }

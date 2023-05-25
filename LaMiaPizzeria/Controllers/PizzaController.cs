@@ -44,13 +44,11 @@ namespace LaMiaPizzeria.Controllers
         public IActionResult Create()
         {
             using PizzeriaContext db = new();
-            List<PizzaCategory> Categorie = db.Categorie.ToList();
+            List<PizzaCategory> Categorie = db.PizzaCategorie.ToList();
 
-            CategoriaPizzaView modelloView = new()
-            {
-                Pizza = new Pizza(),
-                Categorie = Categorie,
-            };
+            CategoriaPizzaView modelloView = new CategoriaPizzaView();
+            modelloView.Pizza = new Pizza();
+            modelloView.Categorie = Categorie;
 
             return View("Create", modelloView);
         }
@@ -62,8 +60,8 @@ namespace LaMiaPizzeria.Controllers
             if (!ModelState.IsValid)
             {
                 using PizzeriaContext db = new();
-                List<PizzaCategory> categorie = db.Categorie.ToList();
-                data.Categorie = categorie;
+                List<PizzaCategory> Categorie = db.PizzaCategorie.ToList();
+                data.Categorie = Categorie;
 
                 return View("Create", data);
             }
@@ -88,12 +86,10 @@ namespace LaMiaPizzeria.Controllers
 
                 if (pizzaModificata != null)
                 {
-                    List<PizzaCategory> Categorie = db.Categorie.ToList();
-                    CategoriaPizzaView modelloView = new()
-                    {
-                        Pizza = new Pizza(),
-                        Categorie = Categorie,
-                    };
+                    List<PizzaCategory> Categorie = db.PizzaCategorie.ToList();
+                    CategoriaPizzaView modelloView = new CategoriaPizzaView();
+                    modelloView.Pizza = new Pizza();
+                    modelloView.Categorie = Categorie;
 
                     return View("Update", modelloView);
                 }
@@ -115,8 +111,8 @@ namespace LaMiaPizzeria.Controllers
             {
                 using (PizzeriaContext db = new PizzeriaContext())
                 {
-                    List<PizzaCategory> PizzaCategory = db.PizzaCategorie.ToList();
-                    data.PizzaCategorie = PizzaCategory;
+                    List<PizzaCategory> Categorie = db.PizzaCategorie.ToList();
+                    data.Categorie = Categorie;
 
                     return View("Update", data);
                 }
@@ -129,10 +125,12 @@ namespace LaMiaPizzeria.Controllers
 
                     if (pizzaDaModificare != null)
                     {
-                        pizzaDaModificare.Immagine = PizzaCategory.Immagine;
-                        pizzaDaModificare.Nome = PizzaCategory.Nome;
-                        pizzaDaModificare.Prezzo = PizzaCategory.Prezzo;
-                        pizzaDaModificare.Descrizione = PizzaCategory.Descrizione;
+                        pizzaDaModificare.Nome = data.Pizza.Nome;
+                        pizzaDaModificare.Descrizione = data.Pizza.Descrizione;
+                        pizzaDaModificare.Immagine = data.Pizza.Immagine;
+                        pizzaDaModificare.Prezzo = data.Pizza.Prezzo;
+                        pizzaDaModificare.Categoria = data.Pizza.Categoria;
+
 
                         db.SaveChanges();
                         return RedirectToAction("Index");
