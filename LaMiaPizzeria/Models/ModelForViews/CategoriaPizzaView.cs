@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-
-namespace LaMiaPizzeria.Models
+﻿namespace LaMiaPizzeria.Models
 {
     public class CategoriaPizzaView
     {
