@@ -2,7 +2,6 @@
 using LaMiaPizzeria.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.SqlServer.Server;
 using System.Data;
 
 namespace LaMiaPizzeria.Controllers
