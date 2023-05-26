@@ -43,7 +43,7 @@ namespace LaMiaPizzeria.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            using PizzeriaContext db = new();
+            using PizzeriaContext db = new PizzeriaContext();
             List<PizzaCategory> Categorie = db.PizzaCategorie.ToList();
 
             CategoriaPizzaView modelloView = new CategoriaPizzaView();
@@ -59,7 +59,8 @@ namespace LaMiaPizzeria.Controllers
         {
             if (!ModelState.IsValid)
             {
-                using PizzeriaContext db = new();
+                
+                using PizzeriaContext db = new PizzeriaContext();
                 List<PizzaCategory> Categorie = db.PizzaCategorie.ToList();
                 data.Categorie = Categorie;
 

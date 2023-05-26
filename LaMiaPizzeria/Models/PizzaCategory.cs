@@ -9,6 +9,8 @@ namespace LaMiaPizzeria.Models
         public string? Description { get; set; }
 
         public List<Pizza> Pizze { get; set; }
+        public List<PizzaCategory> Categorie { get; internal set; }
+        public object Pizza { get; internal set; }
 
         public PizzaCategory()
         {
