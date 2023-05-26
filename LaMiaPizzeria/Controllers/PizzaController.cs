@@ -126,11 +126,11 @@ namespace LaMiaPizzeria.Controllers
 
                     if (pizzaDaModificare != null)
                     {
+                        pizzaDaModificare.Immagine = data.Pizza.Immagine;
                         pizzaDaModificare.Nome = data.Pizza.Nome;
                         pizzaDaModificare.Descrizione = data.Pizza.Descrizione;
-                        pizzaDaModificare.Immagine = data.Pizza.Immagine;
                         pizzaDaModificare.Prezzo = data.Pizza.Prezzo;
-                        pizzaDaModificare.Categoria = data.Pizza.Categoria;
+                        pizzaDaModificare.PizzaCategoryId = data.Pizza.PizzaCategoryId;
 
 
                         db.SaveChanges();
